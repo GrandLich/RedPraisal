@@ -1,0 +1,13 @@
+spring:
+  main:
+    web-application-type: none
+  config:
+    location: 'file:./config.yaml,classpath:/application.yaml'
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: redpraisal
+    password: redpraisal
+    url: 'jdbc:mysql://localhost:3306/redpraisal?createDatabaseIfNotExist=true'
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
