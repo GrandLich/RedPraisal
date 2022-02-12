@@ -18,3 +18,14 @@ dependencies {
 	implementation 'org.liquibase:liquibase-core'
 	runtimeOnly 'mysql:mysql-connector-java'
 }
+
+task copyArtifacts(type: Copy) {
+	doFirst {
+		delete fileTree('artifacts')
+	}
+	from 'build/libs'
+	from 'config'
+	into 'artifacts'
+}
+
+build.finalizedBy(copyArtifacts)

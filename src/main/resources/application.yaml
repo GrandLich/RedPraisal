@@ -2,12 +2,12 @@ spring:
   main:
     web-application-type: none
   config:
-    location: 'file:./config.yaml,classpath:/application.yaml'
+    location: 'file:./config.properties'
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: redpraisal
-    password: redpraisal
-    url: 'jdbc:mysql://localhost:3306/redpraisal?createDatabaseIfNotExist=true'
+    username: ${database.user}
+    password: ${database.password}
+    url: 'jdbc:mysql://${database.host}:${database.port}/${database.dbname}?createDatabaseIfNotExist=true'
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
     enabled: true
