@@ -4,3 +4,5 @@ database:
   user: redpraisal
   password: redpraisal
   dbname: redpraisal
+praisal:
+  url: 'https://evepraisal.com/appraisal/structured.json'
