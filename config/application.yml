@@ -6,3 +6,7 @@ database:
   dbname: redpraisal
 praisal:
   url: 'https://evepraisal.com/appraisal/structured.json'
+  items:
+    - Sabre
+    - Tritanium
+markets: jita, perimeter
