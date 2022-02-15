@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+  <changeSet id="15-02-2021-createTableMarketLog" author="MrLich">
+    <createTable tableName="market_log">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="name" type="varchar(128)"/>
+      <column name="max_buy" type="decimal(16,2)"/>
+      <column name="min_sell" type="decimal(16,2)"/>
+      <column name="date_time" type="varchar(64)"/>
+      <column name="sell_value" type="bigint"/>
+      <column name="buy_value" type="bigint"/>
+      <column name="market" type="varchar(64)"/>
+    </createTable>
+  </changeSet>
+
+</databaseChangeLog>
