@@ -19,7 +19,7 @@ public class AppraisalCommunicationServiceImpl implements AppraisalCommunication
   @Override
   public AppraisalResponse query(String marketName, List<Item> items) {
     AppraisalRequest request = AppraisalRequest.builder()
-        .market_name(marketName)
+        .marketName(marketName)
         .items(items)
         .build();
 
