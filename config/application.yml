@@ -4,9 +4,13 @@ database:
   user: redpraisal
   password: redpraisal
   dbname: redpraisal
+
 praisal:
   url: 'https://evepraisal.com/appraisal/structured.json'
+  logLifetime: 2592000
+  markets:
+    - jita
+    - perimeter
   items:
     - Sabre
     - Tritanium
-markets: jita, perimeter

@@ -39,6 +39,7 @@ public class MarketLog implements Serializable {
   @Column(name = "buy_value")
   private Long buyValue;
   private String market;
+  private Long created;
 
 
 }

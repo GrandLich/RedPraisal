@@ -20,4 +20,10 @@
     </createTable>
   </changeSet>
 
+  <changeSet id="15-02-2021-addColumnCreated" author="MrLich">
+    <addColumn tableName="market_log">
+      <column name="created" type="bigint" defaultOnNull="true"/>
+    </addColumn>
+  </changeSet>
+
 </databaseChangeLog>

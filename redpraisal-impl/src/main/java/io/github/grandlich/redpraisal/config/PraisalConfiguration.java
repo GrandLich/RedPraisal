@@ -11,11 +11,13 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "praisal")
 @Data
-public class FetchingItemList {
+public class PraisalConfiguration {
 
+  private Long logLifetime;
+  private List<String> markets;
   private List<String> items;
 
-  public List<Item> get() {
+  public List<Item> getItemList() {
     return items.stream().map(NamedItem::new).collect(Collectors.toList());
   }
 }

@@ -1,15 +1,12 @@
 package io.github.grandlich.redpraisal.service.impl;
 
-import io.github.grandlich.redpraisal.config.FetchingItemList;
+import io.github.grandlich.redpraisal.config.PraisalConfiguration;
 import io.github.grandlich.redpraisal.domain.entity.MarketLog;
 import io.github.grandlich.redpraisal.domain.repository.MarketLogRepository;
 import io.github.grandlich.redpraisal.dto.AppraisalResponse;
 import io.github.grandlich.redpraisal.dto.AppraisalResponseItem;
-import io.github.grandlich.redpraisal.dto.item.Item;
-import io.github.grandlich.redpraisal.dto.item.NamedItem;
 import io.github.grandlich.redpraisal.service.AppraisalCommunicationService;
 import io.github.grandlich.redpraisal.service.MarketerService;
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -18,7 +15,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +28,7 @@ public class MarketerServiceImpl implements MarketerService {
 
   private final AppraisalCommunicationService communicationService;
   private final MarketLogRepository marketLogRepository;
-  @Value("${markets}")
-  private final List<String> markets;
-  private final FetchingItemList itemList;
+  private final PraisalConfiguration config;
   private int cycleNum = 0;
 
   @Override
@@ -44,8 +38,8 @@ public class MarketerServiceImpl implements MarketerService {
     log.info("{} - Its time to fetch data from EVE-Praisal. Cycle #{}",
         LOG_DATETIME_FORMATTER.format(ZonedDateTime.now()),
         ++cycleNum);
-    markets.forEach(market -> {
-      AppraisalResponse response = communicationService.query(market, itemList.get());
+    config.getMarkets().forEach(market -> {
+      AppraisalResponse response = communicationService.query(market, config.getItemList());
       List<MarketLog> logs = parseAndProvideLogs(response);
       logs.forEach(marketLog -> {
         log.info("{}: Found {} {}`s", marketLog.getMarket(),
@@ -68,6 +62,7 @@ public class MarketerServiceImpl implements MarketerService {
           .minSell(item.getPrices().getSell().getMin())
           .buyValue(item.getPrices().getBuy().getVolume())
           .sellValue(item.getPrices().getSell().getVolume())
+          .created(System.currentTimeMillis() / 1000)
           .build();
       out.add(log);
     }
